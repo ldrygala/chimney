@@ -80,9 +80,10 @@ object DslFSpec extends TestSuite {
           "either" - {
             okForm
               .intoF[Either[List[String], +*], Person]
+              .withFieldConst(_.name, "Joe")
               .withFieldComputedF(_.height, _.height.parseDouble.toEither("bad height"))
               .withFieldComputedF(_.age, _.age.parseInt.toEither("bad age"))
-              .transform ==> Right(Person("John", 10, 140))
+              .transform ==> Right(Person("Joe", 10, 140))
           }
         }
 
